@@ -1,0 +1,5 @@
+git remote set-url origin https://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@github.com/hcau/Documents
+
+
+git config --global credential.helper cache
+
