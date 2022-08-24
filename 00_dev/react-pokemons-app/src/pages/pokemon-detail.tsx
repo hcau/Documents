@@ -33,6 +33,12 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
                   alt={pokemon.name}
                   style={{ width: '250px', margin: '0 auto' }}
                 />
+                <Link
+                  to={`/pokemons/edit/${pokemon.id}`}
+                  className="btn btn-floating halfway-fab waves-effect waves-light"
+                >
+                  <i className="material-icons">edit</i>
+                </Link>
               </div>
               <div className="card-stacked">
                 <div className="card-content">
