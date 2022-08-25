@@ -2,6 +2,7 @@ import React, { FunctionComponent, useState } from 'react';
 import Pokemon from '../models/pokemon';
 import formatType from '../helpers/format-type';
 import { useHistory } from 'react-router-dom';
+import PokemonService from '../services/pokemon-service';
 
 type Props = {
   pokemon: Pokemon;
@@ -171,8 +172,20 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     const isFormValid = validateForm();
     console.log(form);
     if (isFormValid) {
-      history.push(`/pokemons/${pokemon.id}`);
+      pokemon.name = form.name.value;
+      pokemon.hp = form.hp.value;
+      pokemon.cp = form.cp.value;
+      pokemon.types = form.types.value;
+      PokemonService.updatePokemon(pokemon).then(() => {
+        history.push(`/pokemons/${pokemon.id}`);
+      });
     }
+  };
+
+  const deletePokemon = () => {
+    PokemonService.deletePokemon(pokemon).then(() => {
+      history.push(`/pokemons`);
+    });
   };
 
   return (
@@ -186,6 +199,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
                 alt={pokemon.name}
                 style={{ width: '250px', margin: '0 auto' }}
               />
+              <span className="btn-floating halfway-fab waves-effect waves-light">
+                <i onClick={deletePokemon} className="material-icons">
+                  delete
+                </i>
+              </span>
             </div>
             <div className="card-stacked">
               <div className="card-content">

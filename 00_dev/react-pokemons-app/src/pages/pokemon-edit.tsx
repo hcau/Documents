@@ -2,7 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import PokemonForm from '../components/pokemon-form';
 import Pokemon from '../models/pokemon';
-import POKEMONS from '../models/mock-pokemon';
+import PokemonService from '../services/pokemon-service';
 
 type Params = { id: string };
 
@@ -10,12 +10,12 @@ const PokemonEdit: FunctionComponent<RouteComponentProps<Params>> = ({
   match,
 }) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  console.log(match.params.id);
 
   useEffect(() => {
-    POKEMONS.forEach((pokemon) => {
-      if (match.params.id === pokemon.id.toString()) {
-        setPokemon(pokemon);
-      }
+    console.log(match.params.id);
+    PokemonService.getPokemon(+match.params.id).then((pokemon) => {
+      setPokemon(pokemon);
     });
   }, [match.params.id]);
 
