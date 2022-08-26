@@ -2,11 +2,7 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import PokemonCard from '../components/pokemon-card';
 import Pokemon from '../models/pokemon';
 import PokemonService from '../services/pokemon-service';
-import { useHistory } from 'react-router-dom';
-
-type ThePokemon = {
-  pokemon: Pokemon;
-};
+import { Link } from 'react-router-dom';
 
 const PokemonList: FunctionComponent = () => {
   // const pokemons: Pokemon[] = usePokemons();
@@ -19,23 +15,9 @@ const PokemonList: FunctionComponent = () => {
     });
   }, []);
 
-  const [pokemon, setPokemon] = useState<ThePokemon>();
-  const history = useHistory();
-
-  const addPokemon = () => {
-    PokemonService.addPokemon(pokemon).then(() => {
-      history.push(`/pokemons`);
-    });
-  };
-
   return (
     <div>
       <h1 className="center">Pokédex</h1>
-      <span className="btn-floating halfway-fab waves-effect waves-light">
-        <i onClick={addPokemon} className="material-icons">
-          add
-        </i>
-      </span>
       <div className="container">
         <div className="row">
           {pokemons.map((pokemon) => (
@@ -46,6 +28,13 @@ const PokemonList: FunctionComponent = () => {
             />
           ))}
         </div>
+        <Link
+          className="btn-floating btn-large waves-effect waves-light red z-depth-3"
+          style={{ position: 'fixed', bottom: '25px', right: '25px' }}
+          to="/pokemon/add"
+        >
+          <i className="material-icons">add</i>
+        </Link>
       </div>
     </div>
   );

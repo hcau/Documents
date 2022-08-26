@@ -34,7 +34,11 @@ export default class PokemonService {
   }
 
   static addPokemon(pokemon: Pokemon): Promise<Pokemon> {
-    return fetch(`http://localhost:3001/pokemons/${pokemon}`, {
+    // On supprime la propriété "created" de l'objet litétal pokemon
+    //car c'est l'outil formatDate() qui s'occuppe d'afficher la date
+    delete pokemon.created;
+
+    return fetch(`http://localhost:3001/pokemons}`, {
       method: 'POST',
       body: JSON.stringify(pokemon),
       headers: { 'Content-Type': 'application/json; charset=UTF-8' },
