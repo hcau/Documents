@@ -38,11 +38,17 @@ export default class PokemonService {
     //car c'est l'outil formatDate() qui s'occuppe d'afficher la date
     delete pokemon.created;
 
-    return fetch(`http://localhost:3001/pokemons}`, {
+    return fetch(`http://localhost:3001/pokemons`, {
       method: 'POST',
       body: JSON.stringify(pokemon),
-      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      headers: { 'Content-Type': 'application/json' },
     })
+      .then((response) => response.json())
+      .catch((error) => this.handleError(error));
+  }
+
+  static searchPokemon(term: string): Promise<Pokemon[]> {
+    return fetch(`http://localhost:3001/pokemons?q=${term}`)
       .then((response) => response.json())
       .catch((error: Error) => this.handleError(error));
   }

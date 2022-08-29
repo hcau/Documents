@@ -102,6 +102,18 @@
       "types": [
         "Feu"
       ]
+    },
+    {
+      "id": 1661767548010,
+      "hp": 100,
+      "cp": 10,
+      "name": "hcau",
+      "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/044.png",
+      "types": [
+        "Plante",
+        "Fée",
+        "Eau"
+      ]
     }
   ]
 }
